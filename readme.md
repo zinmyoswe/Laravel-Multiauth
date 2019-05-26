@@ -10,7 +10,7 @@
 ## About Laravel
 `php artisan make:auth`
 
-Config>auth.php
+In <b>Config>auth.php</b> It is need to built admin guards
 ```php
 'guards' => [
         'web' => [
@@ -33,6 +33,35 @@ Config>auth.php
             'provider' => 'admins',
         ],
 
+    ],
+```
+and then it is also need to built provider
+```php
+'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+    ],
+    ```
+Then, specify the admin password reset time
+```php
+    'passwords' => [
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 15,
+        ],
     ],
 ```
 
