@@ -47,8 +47,9 @@ and then it is also need to built provider
             'model' => App\Admin::class,
         ],
     ],
-    ```
+```
 Then, specify the admin password reset time
+
 ```php
     'passwords' => [
         'users' => [
