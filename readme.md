@@ -89,8 +89,8 @@ AdminController.php
 Web.php
 ```php
     Route::prefix('admin')->group(function(){
-	Route::get('/login', 'Auth\LoginController@showLoginForm')->name('admin.login');
-	Route::post('/login', 'Auth\LoginController@adminlogin')->name('admin.login.submit');
+	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 	Route::get('/', 'AdminController@index')->name('admin.dashboard');
 });
 ```
@@ -102,8 +102,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use Auth;
 
 class LoginController extends Controller
 {
@@ -137,21 +135,45 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
     }
-    public function showLoginForm(){
-        return view('auth.admin-login');
-    }
-    public function adminlogin(Request $request)
+    
+}
+```
+AdminLoginController.php
+```php
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Auth;
+
+class AdminLoginController extends Controller
+{
+	public function __construct()
     {
-        $this->validate($request, [
-            'email'   => 'required|email',
-            'password' => 'required|min:6'
-        ]);
+        $this->middleware('guest:admin');
+    }
+    public function showLoginForm(){
+    	return view('auth.admin-login');
+    }
 
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+    public function login(Request $request)
+    {
+    	$this->validate($request,[
+    		'email' => 'required|email',
+    		'password' => 'required|min:6'
+    	]);
 
-            return redirect()->intended('/admin');
+    	if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+
+            return redirect()->intended('admin.dashboard');
         }
         return back()->withInput($request->only('email', 'remember'));
+
+    	//Attempt to log the user in
+    	
+
     }
 }
 ```
