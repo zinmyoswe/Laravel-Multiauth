@@ -166,6 +166,6 @@ For User
 
 For Admin
 ![image](https://user-images.githubusercontent.com/29988949/58376738-43884680-7f26-11e9-9ba2-17d0e53b9245.png)
-`localhost/admin`
+`localhost/admin/login`
 
 Hope this Help
