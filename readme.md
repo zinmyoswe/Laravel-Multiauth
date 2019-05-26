@@ -156,8 +156,13 @@ class LoginController extends Controller
 }
 ```
 
-`php artisan tinker`
+`php artisan tinker`<br>
+
 ` $admin = new App\Admin`
 
+For User
+`localhost/`
 
+For Admin
+`localhost/admin`
 Hope this Help
