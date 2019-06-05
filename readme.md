@@ -191,7 +191,7 @@ class AdminLoginController extends Controller
 
     	if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('admin.dashboard');
+            return redirect()->intended('admin');
         }
         return back()->withInput($request->only('email', 'remember'));
 
@@ -201,6 +201,35 @@ class AdminLoginController extends Controller
     }
 }
 ```
+
+admin.blade.php
+```php
+
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">ADMIN Dashboard</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    You are logged in!<strong>ADMIN</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+```
+
 
 `php artisan tinker`<br>
 
