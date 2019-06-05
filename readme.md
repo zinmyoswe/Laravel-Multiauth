@@ -67,6 +67,22 @@ Then, specify the admin password reset time
 ```
 Run `php artisan make:model Admin -m`
 
+Database> Migrations > 2019_06_05_024213_create_admins_table.php
+```php
+    public function up()
+    {
+        Schema::create('admins', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('job_title');
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+    }
+```
+
 Admin.php
 ```php
 namespace App;
@@ -189,6 +205,12 @@ class AdminLoginController extends Controller
 `php artisan tinker`<br>
 
 ` $admin = new App\Admin`
+
+Run `php artisan config:clear`
+
+Run `php artisan cache:clear`
+
+`php artisan serve`
 
 For User
 ![image](https://user-images.githubusercontent.com/29988949/58376753-ad085500-7f26-11e9-931c-77f02be9d50c.png)
