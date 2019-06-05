@@ -65,6 +65,8 @@ Then, specify the admin password reset time
         ],
     ],
 ```
+Run `php artisan make:model Admin -m`
+
 Admin.php
 ```php
 namespace App;
@@ -78,6 +80,9 @@ class Admin extends Authenticatable
 
     protected $guard = 'admin';
 ```
+
+Run `php artisan make:controller Auth\AdminLoginController -r`
+
 AdminController.php
 ```php
     public function __construct()
