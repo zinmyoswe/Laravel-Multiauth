@@ -81,7 +81,7 @@ class Admin extends Authenticatable
     protected $guard = 'admin';
 ```
 
-Run `php artisan make:controller Auth\AdminLoginController -r`
+Run `php artisan make:controller AdminController -r`
 
 AdminController.php
 ```php
@@ -143,6 +143,9 @@ class LoginController extends Controller
     
 }
 ```
+
+Run `php artisan make:controller Auth\AdminLoginController -r`
+
 AdminLoginController.php
 ```php
 <?php
