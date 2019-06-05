@@ -206,7 +206,7 @@ class AdminLoginController extends Controller
 
 ` $admin = new App\Admin`
 
-![image](https://user-images.githubusercontent.com/29988949/58928305-c79cb400-8706-11e9-85b6-0cfa934bcdf0.png)
+
 
 
 Run `php artisan config:clear`
